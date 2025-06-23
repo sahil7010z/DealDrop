@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DealDrop</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      margin-top: 100px;
+    }
+    .logo {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+    .btn-group {
+      margin-top: 30px;
+    }
+    .btn {
+      background: #007bff;
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      margin: 0 10px;
+      display: inline-block;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="/static/images/logo.png" alt="DealDrop Logo" class="logo">
+    <h1>Welcome to DealDrop</h1>
+    <p>Find exclusive local deals before they expire!</p>
+    <div class="btn-group">
+      <a href="/login?role=user" class="btn">Login as User</a>
+      <a href="/login?role=shop" class="btn">Login as Shop</a>
+    </div>
+  </div>
+</body>
+</html>

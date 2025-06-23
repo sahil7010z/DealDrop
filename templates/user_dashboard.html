@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard - DealDrop</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      background-color: #222;
+      color: white;
+      padding: 10px;
+      text-align: right;
+      font-size: 14px;
+    }
+    h2 {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .deal-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .deal-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .price {
+      color: green;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">Welcome, User | <a href="/logout">Logout</a></div>
+  <h2>Nearby Deals</h2>
+  <div class="card-grid">
+    <div class="deal-card">
+      <img src="/static/uploads/milk.jpg" alt="Milk">
+      <h3>Amul Milk</h3>
+      <p><span class="price">₹30</span> <del>₹50</del></p>
+      <p>Expires in 2 days</p>
+    </div>
+    <!-- More cards go here -->
+  </div>
+</body>
+</html>

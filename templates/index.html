@@ -2,48 +2,298 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>DealDrop</title>
+  <title>DealDrop - Home</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #f4f4f4;
+      color: #333;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #222;
+      color: white;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar h2 {
+      font-size: 24px;
+    }
+
+    .navbar a {
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .navbar a:hover {
+      background: #0056b3;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(to right, #007bff, #0056b3);
+      color: white;
+      padding: 60px 20px 20px;
       text-align: center;
-      margin: 0;
-      padding: 0;
     }
-    .container {
-      margin-top: 100px;
-    }
-    .logo {
-      width: 100px;
+
+    .hero h1 {
+      font-size: 48px;
       margin-bottom: 20px;
     }
-    .btn-group {
-      margin-top: 30px;
+
+    .hero p {
+      font-size: 20px;
     }
-    .btn {
+
+    /* 🔄 Slider */
+    .slider {
+      margin-top: 30px;
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .slides {
+      display: flex;
+      width: 400%;
+      height: 100%;
+      animation: slideShow 16s infinite;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    @keyframes slideShow {
+      0%   { transform: translateX(0%); }
+      25%  { transform: translateX(-100%); }
+      50%  { transform: translateX(-200%); }
+      75%  { transform: translateX(-300%); }
+      100% { transform: translateX(0%); }
+    }
+
+    /* Products */
+    .products-section {
+      padding: 60px 20px;
+      background: white;
+      text-align: center;
+    }
+
+    .products-section h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      padding: 0 30px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product-card h3 {
+      margin: 15px 0 8px;
+      font-size: 20px;
+    }
+
+    .price {
+      font-size: 18px;
+      color: green;
+      font-weight: bold;
+    }
+
+    .old-price {
+      color: #888;
+      text-decoration: line-through;
+      font-size: 14px;
+    }
+
+    /* Login Modal */
+    .login-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .login-box h3 {
+      margin-bottom: 20px;
+    }
+
+    .login-box a {
+      display: block;
       background: #007bff;
-      color: #fff;
-      padding: 12px 24px;
+      color: white;
+      padding: 12px;
+      margin: 10px 0;
       text-decoration: none;
       border-radius: 8px;
-      margin: 0 10px;
-      display: inline-block;
     }
-    .btn:hover {
+
+    .login-box a:hover {
       background: #0056b3;
+    }
+
+    .close-btn {
+      background: #888;
+      margin-top: 10px;
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: #aaa;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: white;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="/static/images/logo.png" alt="DealDrop Logo" class="logo">
-    <h1>Welcome to DealDrop</h1>
-    <p>Find exclusive local deals before they expire!</p>
-    <div class="btn-group">
-      <a href="/login?role=user" class="btn">Login as User</a>
-      <a href="/login?role=shop" class="btn">Login as Shop</a>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <h2>DealDrop</h2>
+    <a href="#" onclick="openLogin()">Sign In</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Save Big on Local Essentials</h1>
+    <p>Discover discounts near you on groceries, snacks & more!</p>
+
+    <!-- Sliding Banner -->
+    <div class="slider">
+      <div class="slides">
+        <div class="slide" style="background-image: url('/static/uploads/slide1.jpg');"></div>
+        <div class="slide" style="background-image: url('/static/uploads/slide2.jpg');"></div>
+        <div class="slide" style="background-image: url('/static/uploads/slide3.jpg');"></div>
+        <div class="slide" style="background-image: url('/static/uploads/slide4.jpg');"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="products-section">
+    <h2>🔥 Featured Deals</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="/static/uploads/milk.jpg" alt="Milk">
+        <h3>Amul Milk</h3>
+        <p class="price">₹30 <span class="old-price">₹50</span></p>
+      </div>
+      <div class="product-card">
+        <img src="/static/uploads/bread.jpg" alt="Bread">
+        <h3>Whole Wheat Bread</h3>
+        <p class="price">₹25 <span class="old-price">₹40</span></p>
+      </div>
+      <div class="product-card">
+        <img src="/static/uploads/chips.jpg" alt="Chips">
+        <h3>Potato Chips</h3>
+        <p class="price">₹15 <span class="old-price">₹25</span></p>
+      </div>
+      <div class="product-card">
+        <img src="/static/uploads/juice.jpg" alt="Juice">
+        <h3>Fresh Orange Juice</h3>
+        <p class="price">₹40 <span class="old-price">₹60</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- More Product Sections -->
+  <div id="more-products"></div>
+
+  <!-- Login Modal -->
+  <div class="login-modal" id="loginModal">
+    <div class="login-box">
+      <h3>Login As</h3>
+      <a href="/login?role=user">Customer</a>
+      <a href="/login?role=shop">Shopkeeper</a>
+      <a href="#" class="close-btn" onclick="closeLogin()">Cancel</a>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 DealDrop. All rights reserved.</p>
+    <p><a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Contact</a></p>
+  </footer>
+
+  <script>
+    function openLogin() {
+      document.getElementById('loginModal').style.display = 'flex';
+    }
+
+    function closeLogin() {
+      document.getElementById('loginModal').style.display = 'none';
+    }
+
+    // Load more product sections
+    fetch('/products.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('more-products').innerHTML = html;
+      });
+  </script>
 </body>
 </html>

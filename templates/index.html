@@ -17,7 +17,6 @@
       color: #333;
     }
 
-    /* Navbar */
     .navbar {
       background: #222;
       color: white;
@@ -41,13 +40,14 @@
       padding: 10px 20px;
       border-radius: 6px;
       font-weight: bold;
+      transition: box-shadow 0.3s ease;
     }
 
     .navbar a:hover {
       background: #0056b3;
+      box-shadow: 0 0 10px 2px #007bff99;
     }
 
-    /* Hero */
     .hero {
       background: linear-gradient(to right, #007bff, #0056b3);
       color: white;
@@ -55,49 +55,90 @@
       text-align: center;
     }
 
+    /* 🎯 Carousel Styling */
+    .carousel-container {
+      width: 100%;
+      overflow: hidden;
+      max-height: 220px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 400%;
+      animation: scrollCarousel 20s linear infinite;
+    }
+
+    .carousel-track img {
+      width: 100%;
+      flex-shrink: 0;
+      object-fit: cover;
+      height: 220px;
+    }
+
+    @keyframes scrollCarousel {
+      0%, 20% { transform: translateX(0%); }
+      25%, 45% { transform: translateX(-100%); }
+      50%, 70% { transform: translateX(-200%); }
+      75%, 95% { transform: translateX(-300%); }
+      100% { transform: translateX(0%); }
+    }
+
     .hero h1 {
       font-size: 48px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+      animation: fadeInUp 1.2s ease-out;
     }
 
     .hero p {
       font-size: 20px;
+      animation: fadeInUp 1.4s ease-out;
     }
 
-    /* 🔄 Slider */
-    .slider {
-      margin-top: 30px;
-      height: 220px;
-      overflow: hidden;
-      position: relative;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .slides {
+    .scroll-strip {
       display: flex;
-      width: 400%;
-      height: 100%;
-      animation: slideShow 16s infinite;
+      overflow-x: auto;
+      white-space: nowrap;
+      margin-top: 20px;
+      padding: 10px 0;
+      gap: 20px;
+      scroll-behavior: smooth;
     }
 
-    .slide {
+    .scroll-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scroll-item {
+      display: inline-block;
+      background: white;
+      border-radius: 10px;
+      width: 220px;
+      flex: 0 0 auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .scroll-item:hover {
+      transform: scale(1.05);
+    }
+
+    .scroll-item img {
       width: 100%;
-      height: 100%;
-      flex-shrink: 0;
-      background-size: cover;
-      background-position: center;
+      height: 150px;
+      object-fit: cover;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
 
-    @keyframes slideShow {
-      0%   { transform: translateX(0%); }
-      25%  { transform: translateX(-100%); }
-      50%  { transform: translateX(-200%); }
-      75%  { transform: translateX(-300%); }
-      100% { transform: translateX(0%); }
+    .scroll-item h4 {
+      margin: 10px;
+      font-size: 16px;
+      color: #333;
     }
 
-    /* Products */
     .products-section {
       padding: 60px 20px;
       background: white;
@@ -121,6 +162,12 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 16px rgba(0,0,0,0.2);
     }
 
     .product-card img {
@@ -147,7 +194,6 @@
       font-size: 14px;
     }
 
-    /* Login Modal */
     .login-modal {
       display: none;
       position: fixed;
@@ -179,10 +225,12 @@
       margin: 10px 0;
       text-decoration: none;
       border-radius: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .login-box a:hover {
-      background: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
     }
 
     .close-btn {
@@ -190,7 +238,6 @@
       margin-top: 10px;
     }
 
-    /* Footer */
     footer {
       background: #222;
       color: white;
@@ -207,6 +254,28 @@
     footer a:hover {
       color: white;
     }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -219,48 +288,68 @@
 
   <!-- Hero Section -->
   <section class="hero">
+    <!-- 🎯 Carousel Start -->
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <img src="https://i.postimg.cc/zByYW1Zs/amul-2-height-480.jpg" alt="Burger">
+        <img src="https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg" alt="Pizza">
+        <img src="https://cdn.pixabay.com/photo/2016/03/05/19/02/sandwich-1238248_1280.jpg" alt="Sandwich">
+        <img src="https://cdn.pixabay.com/photo/2017/08/06/06/44/fries-2584638_1280.jpg" alt="Fries">
+      </div>
+    </div>
+    <!-- 🎯 Carousel End -->
+
     <h1>Save Big on Local Essentials</h1>
     <p>Discover discounts near you on groceries, snacks & more!</p>
 
-    <!-- Sliding Banner -->
-    <div class="slider">
-      <div class="slides">
-        <div class="slide" style="background-image: url('/static/uploads/slide1.jpg');"></div>
-        <div class="slide" style="background-image: url('/static/uploads/slide2.jpg');"></div>
-        <div class="slide" style="background-image: url('/static/uploads/slide3.jpg');"></div>
-        <div class="slide" style="background-image: url('/static/uploads/slide4.jpg');"></div>
+    <!-- Trending Product Strip -->
+    <div class="scroll-strip">
+      <div class="scroll-item">
+        <img src="https://images.unsplash.com/photo-1616361726506-9db9e1cc6dd7?auto=format&fit=crop&w=600&q=60" alt="Milk">
+        <h4>Trending: 50% off Milk</h4>
+      </div>
+      <div class="scroll-item">
+        <img src="https://images.unsplash.com/photo-1585238341986-7a3a36c20b0e?auto=format&fit=crop&w=600&q=60" alt="Chips">
+        <h4>Buy 1 Get 1 Chips</h4>
+      </div>
+      <div class="scroll-item">
+        <img src="https://images.unsplash.com/photo-1615486365971-329bb99aef5e?auto=format&fit=crop&w=600&q=60" alt="Juice">
+        <h4>Flat ₹40 on Juices</h4>
+      </div>
+      <div class="scroll-item">
+        <img src="https://images.unsplash.com/photo-1588018129390-b0f0d17e94a7?auto=format&fit=crop&w=600&q=60" alt="Combo">
+        <h4>Snack Combo 40% Off</h4>
       </div>
     </div>
   </section>
 
   <!-- Featured Products -->
-  <section class="products-section">
+  <section class="products-section reveal">
     <h2>🔥 Featured Deals</h2>
     <div class="product-grid">
       <div class="product-card">
-        <img src="/static/uploads/milk.jpg" alt="Milk">
+        <img src="https://images.unsplash.com/photo-1587303031397-4f1b9fae8fba?auto=format&fit=crop&w=600&q=60" alt="Milk">
         <h3>Amul Milk</h3>
         <p class="price">₹30 <span class="old-price">₹50</span></p>
       </div>
       <div class="product-card">
-        <img src="/static/uploads/bread.jpg" alt="Bread">
+        <img src="https://images.unsplash.com/photo-1603398391254-624d5f7cfe50?auto=format&fit=crop&w=600&q=60" alt="Bread">
         <h3>Whole Wheat Bread</h3>
         <p class="price">₹25 <span class="old-price">₹40</span></p>
       </div>
       <div class="product-card">
-        <img src="/static/uploads/chips.jpg" alt="Chips">
+        <img src="https://images.unsplash.com/photo-1603061872214-181bbd520ade?auto=format&fit=crop&w=600&q=60" alt="Chips">
         <h3>Potato Chips</h3>
         <p class="price">₹15 <span class="old-price">₹25</span></p>
       </div>
       <div class="product-card">
-        <img src="/static/uploads/juice.jpg" alt="Juice">
+        <img src="https://images.unsplash.com/photo-1577801598242-38d6b2935c23?auto=format&fit=crop&w=600&q=60" alt="Juice">
         <h3>Fresh Orange Juice</h3>
         <p class="price">₹40 <span class="old-price">₹60</span></p>
       </div>
     </div>
   </section>
 
-  <!-- More Product Sections -->
   <div id="more-products"></div>
 
   <!-- Login Modal -->
@@ -288,12 +377,22 @@
       document.getElementById('loginModal').style.display = 'none';
     }
 
-    // Load more product sections
     fetch('/products.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('more-products').innerHTML = html;
       });
+
+    window.addEventListener('scroll', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      for (let r of reveals) {
+        const top = r.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (top < windowHeight - 50) {
+          r.classList.add('active');
+        }
+      }
+    });
   </script>
 </body>
 </html>
